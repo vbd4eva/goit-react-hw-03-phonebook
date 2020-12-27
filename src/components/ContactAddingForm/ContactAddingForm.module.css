@@ -58,9 +58,11 @@
   text-align: center;
   outline: none;
 }
+[data-foo]:focus:before {
+  content: attr(data-foo) " ";
+}
 .submitBtn {
   position: absolute;
-  border: none;
   bottom: 3px;
   left: 50%;
   transform: translate(-50%, 50%) rotate(45deg);
@@ -73,6 +75,9 @@
   box-shadow: var(--shadow-in);
   background: var(--color-basic) var(--background-convex);
   border-radius: 7px;
+}
+.submitBtn:active {
+  background: var(--color-basic) var(--background-concave);
 }
 .submitBtn__text {
   transform: rotate(-45deg);

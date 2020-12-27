@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import { Component } from 'react';
+import PropTypes from 'prop-types';
 import s from './ContactAddingForm.module.css';
 
 export class ContactAddingForm extends Component {
@@ -7,6 +8,11 @@ export class ContactAddingForm extends Component {
         name: '',
         number: ''
     }
+    
+    static propTypes = {
+        onSubmit: PropTypes.func.isRequired,
+    };
+
 
     handleChange = (e) => {
         const { name, value } = e.currentTarget;
@@ -23,27 +29,34 @@ export class ContactAddingForm extends Component {
     };
 
     render() {
+        const { name, number } = this.state;
         return (
             <form className={s.form} onSubmit={this.handleSubmit}>
                 <div className={s.labelContainer}>
-                    {Object.keys(this.state).map(
-                        (labelName) => { 
-                            return (
-
-                                <label key={labelName} className={s.label}>
-                                    <span className={s.labelText}>{labelName}</span>
-                                    <input
-                                        className={s.inputText}
-                                        type="text"
-                                        name={labelName}
-                                        value={this.state[labelName]}
-                                        onChange={this.handleChange}
-                                        required
-                                    />
-                                </label>
-                            );
-                        }
-                    )}
+                        <label className={s.label}>
+                            <span className={s.labelText}>Name</span>
+                            <input
+                                className={s.inputText}
+                                type="text"
+                                name="name"
+                                value={name}
+                                onChange={this.handleChange}
+                                required
+                            />
+                        </label>
+                        <label className={s.label}>
+                            <span className={s.labelText}>Phone</span>
+                            <input
+                                className={s.inputText}
+                            type="tel"
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                name="number"
+                                value={number}
+                            onChange={this.handleChange}
+                            placeholder="067-333-4444"
+                                required
+                            />
+                        </label>
                 </div>
       
                 <button className={s.submitBtn} type="submit">

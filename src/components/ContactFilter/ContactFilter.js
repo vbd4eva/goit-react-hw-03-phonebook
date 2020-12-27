@@ -1,10 +1,12 @@
-import React from 'react'
+import PropTypes from 'prop-types'
+import s from './ContactFilter.module.css'
 
 function ContactFilter({value, onChange}) {
     return (
-         <label>
-             Find contacts by name
-             <input
+         <label className={s.label}>
+            Find contacts by name
+            <input
+                className={s.input}
                  type="text"
                  name="filter"
                  value={value}
@@ -14,6 +16,10 @@ function ContactFilter({value, onChange}) {
     )
 }
 
+ContactFilter.propTypes = {
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+}
 
 export default ContactFilter
 

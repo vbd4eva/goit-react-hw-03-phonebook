@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
-import ContactAddingForm from './components/ContactAddingForm/ContactAddingForm'
-import ContactFilter from './components/ContactFilter/ContactFilter'
-import ContactList from './components/ContactList/ContactList'
-import Notification from './components/Notification/Notification'
+import ContactAddingForm from './components/ContactAddingForm/ContactAddingForm';
+import ContactsBook from './components/ContactsBook/ContactsBook';
+import ContactFilter from './components/ContactFilter/ContactFilter';
+import ContactList from './components/ContactList/ContactList';
 
 export class App extends Component {
   state = {
     filter: '',
-    contacts: [],
-    
+    contacts: [],    
   }
 
   componentDidMount() {
@@ -69,6 +68,7 @@ export class App extends Component {
   }
 
   deleteContact = (contactId) => { 
+    console.log('deleteContact ' + contactId);
     const newContactList = this.state.contacts.filter(
       ({id}) =>(id !== contactId)
     );
@@ -89,16 +89,11 @@ export class App extends Component {
         <h1>Phonebook</h1>  
         <ContactAddingForm onSubmit={this.handleContactCart} />
 
-        {(contacts.length > 0)
-          ?
-          (<>
-        <h2>Contacts</h2>
-        <ContactFilter value={filter} onChange={this.changeStateFilter} />
-        <ContactList contacts={filteredContacts} deleteContact={this.deleteContact}/>
-          </>)
-          :
-          <Notification message="PhoneBook is emty"/>
-        }
+        <ContactsBook totalNumber={contacts.length}>
+              <ContactFilter value={filter} onChange={this.changeStateFilter} />
+                <ContactList contacts={filteredContacts} deleteContact={this.deleteContact}/>
+        </ContactsBook>
+        
         
       </>
     )

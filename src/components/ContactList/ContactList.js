@@ -1,13 +1,17 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import ContactListItem from './ContactListItem/ContactListItem'
+import Notification from '../Notification/Notification'
+import s from './ContactList.module.css'
+
 
 function ContactList({ contacts, deleteContact }) {
     return (
-        <ul>
+        (contacts.length > 0)
+        ?
+        <ul className={s.list}>
             {contacts.map(
                 ({ id, name, number }) => 
-                    (<li key={id}>
+                    (<li key={id} className={s.item}>
                         <ContactListItem
                             name={name}
                             number={number}
@@ -15,7 +19,10 @@ function ContactList({ contacts, deleteContact }) {
                         />
                     </li>)
             )}
-        </ul>
+            </ul>
+            :
+            <Notification message="is Nothing finded...Try to change request"/>
+            
     )
 }
 
